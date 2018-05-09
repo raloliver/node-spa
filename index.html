@@ -6,7 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
     <title>node-spa</title>
 </head>
 
@@ -28,10 +30,34 @@
         <div class="col-5 m-4">
             <p class="lead">Todos os Usuários</p>
             <ul class="list-group" id="listUser">
-                <li class="list-group-item">Nenhum Usuário Cadastrado</li>
+                <li class="list-group-item d-flex justify-content-center">
+                    <i class="ion-load-c animated infinite rotateIn" aria-hidden="true"></i>
+                </li>
             </ul>
         </div>
     </div>
+    <script>
+        window.onload = () => {
+            const listUser = document.querySelector('#listUser');
+            get();
+        }
+        let get = () => {
+            listUser.innerHTML = '';            
+            axios.get('/api')
+                .then((response) => {
+                    response.data.forEach(item => {
+                        listUser.innerHTML += `<li class="list-group-item d-flex justify-content-center">${item.name}</li>`;
+                    });
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
+        }
+        let post = () => { }
+        let patch = () => { }
+        let put = () => { }
+        let del = () => { }
+    </script>
 </body>
 
 </html>
