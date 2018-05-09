@@ -25,7 +25,14 @@ server.listen(8080, function () {
   console.log('%s listening at %s', server.name, server.url);
 });
 
-server.get('/', function (req, res, next) {
+server.get('/', restify.plugins.serveStatic({
+
+  directory: './',
+  default: 'index.html'
+
+}));
+
+server.get('/api', function (req, res, next) {
 
   knex('rest').then((data) => {
     res.send(data);
