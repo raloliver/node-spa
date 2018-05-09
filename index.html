@@ -45,7 +45,13 @@
             get();
         }
         let templateItem = (id, name) => {
-            return `<li class="list-group-item d-flex justify-content-center">${name}</li>`;
+            return `
+                <li class="list-group-item d-flex">
+                    <span class="mr-auto">${name}</span>
+                    <button type="button" class="btn btn-outline-secondary btn-sm ml-1"><i class="ion-edit editUser" aria-hidden="true"></i></button>
+                    <button type="button" class="btn btn-outline-danger btn-sm ml-1"><i class="ion-trash-a removeUser" aria-hidden="true"></i></button>
+                </li>
+            `;
         }
         let get = () => {
             listUser.innerHTML = '';
